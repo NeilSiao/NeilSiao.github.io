@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>手把手將 Hexo 架設到 GithubPages 上 - Hexo</title>
+  <title>JavaScript function context - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -157,7 +157,7 @@
           <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
-                手把手將 Hexo 架設到 GithubPages 上
+                JavaScript function context
               
             </span>
 
@@ -167,8 +167,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-09-30 10:29" pubdate>
-        September 30, 2020 am
+      <time datetime="2020-10-08 16:03" pubdate>
+        October 8, 2020 pm
       </time>
     </span>
   
@@ -179,7 +179,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      709 字
+      314 字
     </span>
   
 
@@ -189,7 +189,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      4
        分钟
     </span>
   
@@ -219,74 +219,45 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">手把手將 Hexo 架設到 GithubPages 上</h1>
+            <h1 style="display: none">JavaScript function context</h1>
             
             <div class="markdown-body" id="post-body">
-              <ol>
-<li><p><a target="_blank" rel="noopener" href="https://hexo.io/zh-tw/docs/">Hexo 官方文件</a><br>到 node 官網下載安裝檔，安裝 node.js 他會附帶 npm 工具。</p>
-<pre><code class="hljs awk"><span class="hljs-regexp">//</span>hexo 的命令列工具，安裝完畢可以使用 hexo --help
-npm install -g hexo-cli  <span class="hljs-regexp">//</span>(CMD 需重開。)
-hexo init &lt;folder&gt;
-cd &lt;folder&gt;
-npm install <span class="hljs-regexp">//</span>安裝 hexo 相關的 package</code></pre>
-<p>執行完上方的指令就等同成功建置完部落格了，剩下的就是相關參數設定，像是網站的標題、網站的風格、文章等等。此時可以直接先使用 <code>hexo server</code> ; 即可看到部落格的畫面。也可以使用 <code>hexo new page about</code> 先行新增一個關於部落格的介紹頁面玩玩看。</p>
-</li>
-<li><p>佈署到 githubPages<br>在 github 上面，建立一個 Github Repo，Repo 名稱為 &lt;Github 用戶名&gt;.github.io ，由於我是採用 Travis CI 進行佈署，所以還需要 Github 授權 Travis CI 權限，主要分為下方兩個部分。</p>
+              <h2 id="Javascript-的-function"><a href="#Javascript-的-function" class="headerlink" title="Javascript 的 function"></a>Javascript 的 function</h2><p>今天在練習 js 的時候，一直卡在該用 this 還是 var。主要是 this 在 context 情境不同時，所指向的對象是不同的。然而這個情況在 普通 function 和箭頭函式的狀況下又有不一樣的變化。</p>
 <ol>
-<li>前往 Travis 進行 github 帳號連結，且設定要授權給 travis 的 Repository。 (此部分只要登入 <a target="_blank" rel="noopener" href="https://travis-ci.com/">Travis</a> 點一點就 OK 了)</li>
-<li>前往 Github/Settings/Deverloper settings/Personal access tokens 設立一個給 Travis CI 的 token，後續在每次 git commit 到 github 時，travis 會藉由這個 token 來進行 build 的腳本。</li>
+<li>arrow function 內會綁定當前 this， normal function 不會。</li>
+<li>可以利用 var 定義一個參數綁定當前的位置，進行呼叫。</li>
+<li>var、this 所定義出來的變數是不同的。</li>
 </ol>
-<p>建置給 travis 的 Token 該權限請將 repo 開好開滿。<br><img src="/img/travis_ci_github_token.jpg" srcset="/img/loading.gif" title="Github token generate"></p>
-<p>接著到 Travis 網站貼上產生的 token，token name 可以參照後續的 .travis.yml<br><img src="/img/travis_setting_gh.jpg" srcset="/img/loading.gif" title="Travis setting"></p>
-<p>當 travis 要 build 你的專案時，你還需要告訴 travis 該怎麼做，因此需要在 github repo 新增 <code>.travis.yml</code> 檔案，藉由這個檔案告訴 travis 該如何建置環境及 compile，這樣當 push 檔案到 github 時，travis 就會依照你的 .travis.yml 步驟進行 pull 與 build，然後 travis 會自動將 build 好的檔案自動 push 到 gh-pages 的分支之中。</p>
-<p>.travis.yml 內容參考如下</p>
-<pre><code class="hljs yaml"><span class="hljs-string">//</span> <span class="hljs-string">詳細參數可參考</span> <span class="hljs-string">travis</span> <span class="hljs-string">document</span>
-<span class="hljs-attr">sudo:</span> <span class="hljs-literal">false</span>
-<span class="hljs-attr">language:</span> <span class="hljs-string">node_js</span>
-<span class="hljs-attr">node_js:</span>
-<span class="hljs-bullet">-</span> <span class="hljs-number">10</span> <span class="hljs-comment"># use nodejs v10 LTS</span>
-<span class="hljs-attr">cache:</span> <span class="hljs-string">npm</span>
-<span class="hljs-attr">branches:</span>
-<span class="hljs-attr">only:</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-string">master</span> <span class="hljs-comment"># build master branch only</span>
-<span class="hljs-attr">script:</span>
-<span class="hljs-bullet">-</span> <span class="hljs-string">git</span> <span class="hljs-string">submodule</span> <span class="hljs-string">init</span>
-<span class="hljs-bullet">-</span> <span class="hljs-string">git</span> <span class="hljs-string">submodule</span> <span class="hljs-string">update</span> <span class="hljs-string">--remote</span>
-<span class="hljs-bullet">-</span> <span class="hljs-string">hexo</span> <span class="hljs-string">generate</span> <span class="hljs-comment"># generate static files</span>
-<span class="hljs-attr">deploy:</span>
-<span class="hljs-attr">provider:</span> <span class="hljs-string">pages</span>
-<span class="hljs-attr">skip-cleanup:</span> <span class="hljs-string">trueg</span>
-<span class="hljs-attr">github-token:</span> <span class="hljs-string">$GH_TOKEN</span>
-<span class="hljs-attr">keep-history:</span> <span class="hljs-literal">true</span>
-<span class="hljs-attr">on:</span>
-    <span class="hljs-attr">branch:</span> <span class="hljs-string">master</span>
-<span class="hljs-attr">local-dir:</span> <span class="hljs-string">public</span></code></pre>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">timer</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> self = <span class="hljs-built_in">this</span>;
+  <span class="hljs-keyword">var</span> intervalId;
+  <span class="hljs-built_in">this</span>.intervalId = <span class="hljs-number">666</span>;
 
-<p><code>注意</code>此時 Github 網站的根目錄還停留在 master branch 所以會看不到任何頁面，需要至 github Repo 的 Setting 進行 Source 切換。</p>
-<p><img src="/img/githubpage_change_branch.jpg" srcset="/img/loading.gif"></p>
-<p>這樣就可以輸入 https://&lt;github username&gt;.github.io 看到建置好的網站了。</p>
-</li>
-</ol>
-<hr>
-<p>其他: Hexo 切換不同的部落格主題(Theme)</p>
-<p>本站有使用到 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo fluid theme</a> 這個主題，此時需要進行一些額外設定，其實主要參考官方網站慢慢看即可。剛好也有卡到 git submodule 的問題，後續再來寫一篇 git submodule…</p>
-<p>另外 github pages 其實是有一些限制</p>
-<ul>
-<li>容量上限建議 1GB 內，不能超過 5GB (Strongly recommended)</li>
-<li>月流量不能超過 100GB</li>
-<li>一個小時只能 build 10 次</li>
-</ul>
-<p>要超過這些限制好像也挺難的…</p>
-<blockquote>
-<blockquote>
-<p>參考資源連結</p>
-</blockquote>
-</blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></li>
-<li><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/">Hexo Fluid</a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/about-github-pages">GithubPages</a></li>
-</ul>
+  <span class="hljs-built_in">this</span>.normalLogFun = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>, self); <span class="hljs-comment">// this 會因為 setInterval 而指向 window, self 則指向 timer</span>
+    <span class="hljs-built_in">clearInterval</span>(intervalId);
+    self.isSame();
+  &#125;;
+  <span class="hljs-built_in">this</span>.arrowLogFun = <span class="hljs-function">() =&gt;</span> &#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>, self); <span class="hljs-comment">// 在 arrow function 下，this 會先行綁定當前的 context.</span>
+    <span class="hljs-built_in">clearInterval</span>(intervalId);
+    <span class="hljs-built_in">this</span>.isSame();
+  &#125;;
+  <span class="hljs-built_in">this</span>.start = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    intervalId = <span class="hljs-built_in">setInterval</span>(<span class="hljs-built_in">this</span>.normalLogFun, <span class="hljs-number">1000</span>); <span class="hljs-comment">//把當前的 normal function 傳至 window.setInterval，所以 Context 會改變。</span>
+  &#125;;
+  <span class="hljs-built_in">this</span>.start2 = <span class="hljs-function">() =&gt;</span> &#123;
+    intervalId = <span class="hljs-built_in">setInterval</span>(<span class="hljs-built_in">this</span>.arrowLogFun, <span class="hljs-number">1000</span>); <span class="hljs-comment">//把當前的 arrow function 傳至 window.setInterval，所以 Context 會改變。  (Arrow 不受 Context 改變影響)</span>
+    <span class="hljs-built_in">this</span>.isSame();
+  &#125;;
+  <span class="hljs-built_in">this</span>.isSame = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(intervalId); <span class="hljs-comment">// setInterval 回傳的 id</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.intervalId); <span class="hljs-comment">// 666</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.intervalId); <span class="hljs-comment">// undefined</span>
+    <span class="hljs-built_in">console</span>.assert(intervalId == <span class="hljs-built_in">this</span>.intervalId, <span class="hljs-string">&quot;It&#x27;s different!!&quot;</span>); <span class="hljs-comment">// 因為綁定的對象不同，所以是不同的東西</span>
+  &#125;;
+&#125;
+<span class="hljs-comment">//var t = new timer(); t.start(); t.start2()  可以使用這個測試</span></code></pre>
 
             </div>
             <hr>
@@ -297,9 +268,7 @@ npm install <span class="hljs-regexp">//</span>安裝 hexo 相關的 package</co
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
-                    
-                      <a class="hover-with-bg" href="/tags/github-pages/">github_pages</a>
+                      <a class="hover-with-bg" href="/tags/javascript/">-javascript</a>
                     
                   </div>
                 
@@ -316,8 +285,8 @@ npm install <span class="hljs-regexp">//</span>安裝 hexo 相關的 package</co
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/09/29/NewPost/">
-                        <span class="hidden-mobile">NewPost</span>
+                      <a href="/2020/10/08/hexo_githubpages/">
+                        <span class="hidden-mobile">手把手將 Hexo 架設到 GithubPages 上</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
