@@ -234,27 +234,36 @@
   <span class="hljs-built_in">this</span>.intervalId = <span class="hljs-number">666</span>;
 
   <span class="hljs-built_in">this</span>.normalLogFun = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>, self); <span class="hljs-comment">// this 會因為 setInterval 而指向 window, self 則指向 timer</span>
+    
+    <span class="hljs-comment">// this 會因為 setInterval 而指向 window, self 則指向 timer</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>, self);
+
     <span class="hljs-built_in">clearInterval</span>(intervalId);
     self.isSame();
   &#125;;
   <span class="hljs-built_in">this</span>.arrowLogFun = <span class="hljs-function">() =&gt;</span> &#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>, self); <span class="hljs-comment">// 在 arrow function 下，this 會先行綁定當前的 context.</span>
+    <span class="hljs-comment">// 在 arrow function 下，this 會先行綁定當前的 context.</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>, self); 
+    
     <span class="hljs-built_in">clearInterval</span>(intervalId);
     <span class="hljs-built_in">this</span>.isSame();
   &#125;;
   <span class="hljs-built_in">this</span>.start = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    intervalId = <span class="hljs-built_in">setInterval</span>(<span class="hljs-built_in">this</span>.normalLogFun, <span class="hljs-number">1000</span>); <span class="hljs-comment">//把當前的 normal function 傳至 window.setInterval，所以 Context 會改變。</span>
+    <span class="hljs-comment">//把當前的 normal function 傳至 window.setInterval，所以 Context 會改變。</span>
+    intervalId = <span class="hljs-built_in">setInterval</span>(<span class="hljs-built_in">this</span>.normalLogFun, <span class="hljs-number">1000</span>); 
   &#125;;
   <span class="hljs-built_in">this</span>.start2 = <span class="hljs-function">() =&gt;</span> &#123;
-    intervalId = <span class="hljs-built_in">setInterval</span>(<span class="hljs-built_in">this</span>.arrowLogFun, <span class="hljs-number">1000</span>); <span class="hljs-comment">//把當前的 arrow function 傳至 window.setInterval，所以 Context 會改變。  (Arrow 不受 Context 改變影響)</span>
+    <span class="hljs-comment">//把當前的 arrow function 傳至 window.setInterval，所以 Context 會改變。  (Arrow 不受 Context 改變影響)</span>
+    intervalId = <span class="hljs-built_in">setInterval</span>(<span class="hljs-built_in">this</span>.arrowLogFun, <span class="hljs-number">1000</span>); 
     <span class="hljs-built_in">this</span>.isSame();
   &#125;;
   <span class="hljs-built_in">this</span>.isSame = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(intervalId); <span class="hljs-comment">// setInterval 回傳的 id</span>
+    <span class="hljs-comment">// setInterval 回傳的 id</span>
+    <span class="hljs-built_in">console</span>.log(intervalId); 
     <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.intervalId); <span class="hljs-comment">// 666</span>
     <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.intervalId); <span class="hljs-comment">// undefined</span>
-    <span class="hljs-built_in">console</span>.assert(intervalId == <span class="hljs-built_in">this</span>.intervalId, <span class="hljs-string">&quot;It&#x27;s different!!&quot;</span>); <span class="hljs-comment">// 因為綁定的對象不同，所以是不同的東西</span>
+    <span class="hljs-comment">// 因為綁定的對象不同，所以是不同的東西</span>
+    <span class="hljs-built_in">console</span>.assert(intervalId == <span class="hljs-built_in">this</span>.intervalId, <span class="hljs-string">&quot;It&#x27;s different!!&quot;</span>); 
   &#125;;
 &#125;
 <span class="hljs-comment">//var t = new timer(); t.start(); t.start2()  可以使用這個測試</span></code></pre>
