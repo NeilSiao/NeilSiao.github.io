@@ -19,26 +19,29 @@
   <meta name="keywords" content="">
   <title>JavaScript function context - Hexo</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_pf9vaxs7x7b.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
@@ -50,6 +53,10 @@
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.2.0"></head>
@@ -154,8 +161,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript function context">
               
                 JavaScript function context
               
@@ -217,11 +224,11 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">JavaScript function context</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <h2 id="Javascript-的-function"><a href="#Javascript-的-function" class="headerlink" title="Javascript 的 function"></a>Javascript 的 function</h2><p>今天在練習 js 的時候，一直卡在該用 this 還是 var。主要是 this 在 context 情境不同時，所指向的對象是不同的。然而這個情況在 普通 function 和箭頭函式的狀況下又有不一樣的變化。</p>
 <ol>
 <li>arrow function 內會綁定當前 this， normal function 不會。</li>
@@ -229,44 +236,7 @@
 <li>var、this 所定義出來的變數是不同的。</li>
 <li>this.variable 可以直接被外部存取、var variable 則需另外定義 getter 才行。</li>
 </ol>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">timer</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> self = <span class="hljs-built_in">this</span>;
-  <span class="hljs-keyword">var</span> intervalId;
-  <span class="hljs-built_in">this</span>.intervalId = <span class="hljs-number">666</span>;
-
-  <span class="hljs-built_in">this</span>.normalLogFun = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-comment">// this 會因為 setInterval 而指向 window, self 則指向 timer</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>, self);
-
-    <span class="hljs-built_in">clearInterval</span>(intervalId);
-    self.isSame();
-  &#125;;
-  <span class="hljs-built_in">this</span>.arrowLogFun = <span class="hljs-function">() =&gt;</span> &#123;
-    <span class="hljs-comment">// 在 arrow function 下，this 會先行綁定當前的 context.</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>, self);
-
-    <span class="hljs-built_in">clearInterval</span>(intervalId);
-    <span class="hljs-built_in">this</span>.isSame();
-  &#125;;
-  <span class="hljs-built_in">this</span>.start = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-comment">//把當前的 normal function 傳至 window.setInterval，所以 Context 會改變。</span>
-    intervalId = <span class="hljs-built_in">setInterval</span>(<span class="hljs-built_in">this</span>.normalLogFun, <span class="hljs-number">1000</span>);
-  &#125;;
-  <span class="hljs-built_in">this</span>.start2 = <span class="hljs-function">() =&gt;</span> &#123;
-    <span class="hljs-comment">//把當前的 arrow function 傳至 window.setInterval，所以 Context 會改變。  (Arrow 不受 Context 改變影響)</span>
-    intervalId = <span class="hljs-built_in">setInterval</span>(<span class="hljs-built_in">this</span>.arrowLogFun, <span class="hljs-number">1000</span>);
-    <span class="hljs-built_in">this</span>.isSame();
-  &#125;;
-  <span class="hljs-built_in">this</span>.isSame = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-comment">// setInterval 回傳的 id</span>
-    <span class="hljs-built_in">console</span>.log(intervalId);
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.intervalId); <span class="hljs-comment">// 666</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.intervalId); <span class="hljs-comment">// undefined</span>
-    <span class="hljs-comment">// 因為綁定的對象不同，所以是不同的東西</span>
-    <span class="hljs-built_in">console</span>.assert(intervalId == <span class="hljs-built_in">this</span>.intervalId, <span class="hljs-string">&quot;It&#x27;s different!!&quot;</span>);
-  &#125;;
-&#125;
-<span class="hljs-comment">//var t = new timer(); t.start(); t.start2()  可以使用這個測試</span></code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">timer</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> self = <span class="hljs-built_in">this</span>;<br>  <span class="hljs-keyword">var</span> intervalId;<br>  <span class="hljs-built_in">this</span>.intervalId = <span class="hljs-number">666</span>;<br><br>  <span class="hljs-built_in">this</span>.normalLogFun = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-comment">// this 會因為 setInterval 而指向 window, self 則指向 timer</span><br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>, self);<br><br>    <span class="hljs-built_in">clearInterval</span>(intervalId);<br>    self.isSame();<br>  &#125;;<br>  <span class="hljs-built_in">this</span>.arrowLogFun = <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// 在 arrow function 下，this 會先行綁定當前的 context.</span><br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>, self);<br><br>    <span class="hljs-built_in">clearInterval</span>(intervalId);<br>    <span class="hljs-built_in">this</span>.isSame();<br>  &#125;;<br>  <span class="hljs-built_in">this</span>.start = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-comment">//把當前的 normal function 傳至 window.setInterval，所以 Context 會改變。</span><br>    intervalId = <span class="hljs-built_in">setInterval</span>(<span class="hljs-built_in">this</span>.normalLogFun, <span class="hljs-number">1000</span>);<br>  &#125;;<br>  <span class="hljs-built_in">this</span>.start2 = <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">//把當前的 arrow function 傳至 window.setInterval，所以 Context 會改變。  (Arrow 不受 Context 改變影響)</span><br>    intervalId = <span class="hljs-built_in">setInterval</span>(<span class="hljs-built_in">this</span>.arrowLogFun, <span class="hljs-number">1000</span>);<br>    <span class="hljs-built_in">this</span>.isSame();<br>  &#125;;<br>  <span class="hljs-built_in">this</span>.isSame = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-comment">// setInterval 回傳的 id</span><br>    <span class="hljs-built_in">console</span>.log(intervalId);<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.intervalId); <span class="hljs-comment">// 666</span><br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.intervalId); <span class="hljs-comment">// undefined</span><br>    <span class="hljs-comment">// 因為綁定的對象不同，所以是不同的東西</span><br>    <span class="hljs-built_in">console</span>.assert(intervalId == <span class="hljs-built_in">this</span>.intervalId, <span class="hljs-string">&quot;It&#x27;s different!!&quot;</span>);<br>  &#125;;<br>&#125;<br><span class="hljs-comment">//var t = new timer(); t.start(); t.start2()  可以使用這個測試</span><br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -290,15 +260,15 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2020/12/17/hexo_githubpages/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">手把手將 Hexo 架設到 GithubPages 上</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2020/10/08/hexo_githubpages/">
-                        <span class="hidden-mobile">手把手將 Hexo 架設到 GithubPages 上</span>
-                        <span class="visible-mobile">Next</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>
@@ -314,7 +284,7 @@
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -326,16 +296,15 @@
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -356,33 +325,44 @@
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
     
 
     
+  </main>
 
-    
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  
+
+  
+
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -397,85 +377,37 @@
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
 
 
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -492,8 +424,8 @@
 
 
 
-
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 
