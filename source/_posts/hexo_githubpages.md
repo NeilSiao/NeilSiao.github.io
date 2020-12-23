@@ -1,6 +1,5 @@
 ---
 title: 手把手將 Hexo 架設到 GithubPages 上
-date: 2020-10-08 16:03
 tags:
   - hexo
   - github_pages
