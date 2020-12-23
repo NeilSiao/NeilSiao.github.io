@@ -4,17 +4,17 @@
   
   
   <entry>
-    <title>LaraDock</title>
-    <link href="/2020/12/17/laradock/"/>
-    <url>/2020/12/17/laradock/</url>
+    <title>Install VSCode in ubuntu</title>
+    <link href="/2020/12/23/installVscode/"/>
+    <url>/2020/12/23/installVscode/</url>
     
-    <content type="html"><![CDATA[<h2 id="how-to-install-laradock"><a href="#how-to-install-laradock" class="headerlink" title="how to install laradock"></a>how to install laradock</h2><p>(Laradock Offical website)[<a href="https://laradock.io/]">https://laradock.io/]</a> </p><ol><li>snap install docker</li><li>git clone <a href="https://github.com/laradock/laradock.git">https://github.com/laradock/laradock.git</a></li><li>cd laradock &amp;&amp; cp env-example .env</li><li>vi .env<br>Find “APP_CODE_PATH_HOST” Set to laravel project location.</li><li>docker-compose up -d mysql redis phpmyadmin redis workspace</li><li>docker-compose exec mysql bash</li><li>mysql -uroot -proot </li><li>CREATE ‘user’@’localhost’ IDENTIFIED BY ‘PASSWORD’</li><li>CREATE DATABASE laravel;</li><li>Start Developing~~  e.g. php artisan key:generate &amp;&amp; php artisan migrate &amp;&amp; php artisan db:seed</li></ol><p>Now you can see laravel offical website pages by visiting <a href="http://localhost/">http://localhost:80/</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="how-to-install-VSCode-in-ubuntu"><a href="#how-to-install-VSCode-in-ubuntu" class="headerlink" title="how to install VSCode in ubuntu"></a>how to install VSCode in ubuntu</h2><p>(VSCode Official website)[<a href="https://code.visualstudio.com/docs/?dv=linux64_deb%5D">https://code.visualstudio.com/docs/?dv=linux64_deb]</a> </p><ol><li>Download VSCode deb package </li><li>Open it by ubuntu software store</li><li>Down<blockquote><blockquote><blockquote><p>If it shows unsupported file then use another way, open a command line to install<br>type command below.</p></blockquote></blockquote></blockquote><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">dpkg</span> <span class="hljs-selector-tag">-i</span> <span class="hljs-selector-tag">vscode</span><span class="hljs-selector-class">.deb</span><br></code></pre></td></tr></table></figure></li></ol>]]></content>
     
     
     
     <tags>
       
-      <tag>-docker laravel</tag>
+      <tag>-ubuntu dpkg ide</tag>
       
     </tags>
     
@@ -24,8 +24,8 @@
   
   <entry>
     <title>手把手將 Hexo 架設到 GithubPages 上</title>
-    <link href="/2020/10/08/hexo_githubpages/"/>
-    <url>/2020/10/08/hexo_githubpages/</url>
+    <link href="/2020/12/23/hexo_githubpages/"/>
+    <url>/2020/12/23/hexo_githubpages/</url>
     
     <content type="html"><![CDATA[<ol><li><p><a href="https://hexo.io/zh-tw/docs/">Hexo 官方文件</a><br>到 node 官網下載安裝檔，安裝 node.js 他會附帶 npm 工具。</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>hexo 的命令列工具，安裝完畢可以使用 hexo --help<br>npm install -g hexo-cli  <span class="hljs-regexp">//</span>(CMD 需重開。)<br>hexo init &lt;folder&gt;<br>cd &lt;folder&gt;<br>npm install <span class="hljs-regexp">//</span>安裝 hexo 相關的 package<br></code></pre></td></tr></table></figure><p>執行完上方的指令就等同成功建置完部落格了，剩下的就是相關參數設定，像是網站的標題、網站的風格、文章等等。此時可以直接先使用 <code>hexo server</code> ; 即可看到部落格的畫面。也可以使用 <code>hexo new page about</code> 先行新增一個關於部落格的介紹頁面玩玩看。</p></li><li><p>佈署到 githubPages<br>在 github 上面，建立一個 Github Repo，Repo 名稱為 &lt;Github 用戶名&gt;.github.io ，由於我是採用 Travis CI 進行佈署，所以還需要 Github 授權 Travis CI 權限，主要分為下方兩個部分。</p><ol><li>前往 Travis 進行 github 帳號連結，且設定要授權給 travis 的 Repository。 (此部分只要登入 <a href="https://travis-ci.com/">Travis</a> 點一點就 OK 了)</li><li>前往 Github/Settings/Deverloper settings/Personal access tokens 設立一個給 Travis CI 的 token，後續在每次 git commit 到 github 時，travis 會藉由這個 token 來進行 build 的腳本。</li></ol><p>建置給 travis 的 Token 該權限請將 repo 開好開滿。<br><img src="/img/travis_ci_github_token.jpg" title="Github token generate"></p><p>接著到 Travis 網站貼上產生的 token，token name 可以參照後續的 .travis.yml<br><img src="/img/travis_setting_gh.jpg" title="Travis setting"></p><p>當 travis 要 build 你的專案時，你還需要告訴 travis 該怎麼做，因此需要在 github repo 新增 <code>.travis.yml</code> 檔案，藉由這個檔案告訴 travis 該如何建置環境及 compile，這樣當 push 檔案到 github 時，travis 就會依照你的 .travis.yml 步驟進行 pull 與 build，然後 travis 會自動將 build 好的檔案自動 push 到 gh-pages 的分支之中。</p><p>.travis.yml 內容參考如下</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">//</span> <span class="hljs-string">詳細參數可參考</span> <span class="hljs-string">travis</span> <span class="hljs-string">document</span><br><span class="hljs-attr">sudo:</span> <span class="hljs-literal">false</span><br><span class="hljs-attr">language:</span> <span class="hljs-string">node_js</span><br><span class="hljs-attr">node_js:</span><br><span class="hljs-bullet">-</span> <span class="hljs-number">10</span> <span class="hljs-comment"># use nodejs v10 LTS</span><br><span class="hljs-attr">cache:</span> <span class="hljs-string">npm</span><br><span class="hljs-attr">branches:</span><br><span class="hljs-attr">only:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">master</span> <span class="hljs-comment"># build master branch only</span><br><span class="hljs-attr">script:</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">git</span> <span class="hljs-string">submodule</span> <span class="hljs-string">init</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">git</span> <span class="hljs-string">submodule</span> <span class="hljs-string">update</span> <span class="hljs-string">--remote</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">hexo</span> <span class="hljs-string">generate</span> <span class="hljs-comment"># generate static files</span><br><span class="hljs-attr">deploy:</span><br><span class="hljs-attr">provider:</span> <span class="hljs-string">pages</span><br><span class="hljs-attr">skip-cleanup:</span> <span class="hljs-string">trueg</span><br><span class="hljs-attr">github-token:</span> <span class="hljs-string">$GH_TOKEN</span><br><span class="hljs-attr">keep-history:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">on:</span><br>    <span class="hljs-attr">branch:</span> <span class="hljs-string">master</span><br><span class="hljs-attr">local-dir:</span> <span class="hljs-string">public</span><br></code></pre></td></tr></table></figure><p><code>注意</code>此時 Github 網站的根目錄還停留在 master branch 所以會看不到任何頁面，需要至 github Repo 的 Setting 進行 Source 切換。</p><p><img src="/img/githubpage_change_branch.jpg"></p><p>這樣就可以輸入 https://&lt;github username&gt;.github.io 看到建置好的網站了。</p></li></ol><hr><p>其他: Hexo 切換不同的部落格主題(Theme)</p><p>本站有使用到 <a href="https://hexo.io/zh-cn/docs/">Hexo fluid theme</a> 這個主題，此時需要進行一些額外設定，其實主要參考官方網站慢慢看即可。剛好也有卡到 git submodule 的問題，後續再來寫一篇 git submodule…</p><p>另外 github pages 其實是有一些限制</p><ul><li>容量上限建議 1GB 內，不能超過 5GB (Strongly recommended)</li><li>月流量不能超過 100GB</li><li>一個小時只能 build 10 次</li></ul><p>要超過這些限制好像也挺難的…</p><blockquote><blockquote><p>參考資源連結</p></blockquote></blockquote><ul><li><a href="https://hexo.io/zh-cn/docs/">Hexo</a></li><li><a href="https://hexo.fluid-dev.com/docs/">Hexo Fluid</a></li><li><a href="https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/about-github-pages">GithubPages</a></li></ul>]]></content>
     
@@ -36,6 +36,25 @@
       <tag>hexo</tag>
       
       <tag>github_pages</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>JavaScript function context</title>
+    <link href="/2020/12/17/laradock/"/>
+    <url>/2020/12/17/laradock/</url>
+    
+    <content type="html"><![CDATA[<h2 id="how-to-install-laradock"><a href="#how-to-install-laradock" class="headerlink" title="how to install laradock"></a>how to install laradock</h2><p>(Laradock Offical website)[<a href="https://laradock.io/]">https://laradock.io/]</a> </p><ol><li>snap install docker</li><li>git clone <a href="https://github.com/laradock/laradock.git">https://github.com/laradock/laradock.git</a></li><li>cd laradock &amp;&amp; cp env-example .env</li><li>vi .env<br>Find “APP_CODE_PATH_HOST” Set to laravel project location.</li><li>docker-compose up -d mysql redis phpmyadmin redis workspace</li><li>docker-compose exec mysql bash</li><li>mysql -uroot -proot </li><li>CREATE ‘user’@’localhost’ IDENTIFIED BY ‘PASSWORD’</li><li>CREATE DATABASE laravel;</li><li>Start Developing~~  e.g. php artisan key:generate &amp;&amp; php artisan migrate &amp;&amp; php artisan db:seed</li></ol><p>Now you can see laravel offical website pages by visiting <a href="http://localhost/">http://localhost:80/</a></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-docker laravel</tag>
       
     </tags>
     
