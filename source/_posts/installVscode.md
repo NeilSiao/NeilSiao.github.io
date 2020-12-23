@@ -10,11 +10,19 @@ tags: -ubuntu dpkg ide
 1. Download VSCode deb package 
 2. Open it by ubuntu software store
 3. Down
->>> If it shows unsupported file then use another way, open a command line to install
+
+### Option.1
+- If it shows unsupported file then use another way, open a command line to install
 type command below.
 ```
 sudo dpkg -i vscode.deb
 ```
+
+### Option.2 
+move your download file to home directory(~), because Ubuntu software is unable to reach it in /tmp directory. looks like some bug.
+
+
+
 
 
 
