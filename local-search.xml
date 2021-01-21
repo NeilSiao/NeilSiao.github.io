@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>snap docker is inactive</title>
+    <link href="/2021/01/21/dockerInactive/"/>
+    <url>/2021/01/21/dockerInactive/</url>
+    
+    <content type="html"><![CDATA[<h2 id="snap-start-docker-啟動後還是-inactive-的怪問題"><a href="#snap-start-docker-啟動後還是-inactive-的怪問題" class="headerlink" title="snap start docker 啟動後還是 inactive 的怪問題."></a>snap start docker 啟動後還是 inactive 的怪問題.</h2><p>前一陣子,經常只要重新開機後,就會導致 docker 無法正常運行,常常需要照著(這篇)[<a href="https://askubuntu.com/questions/907110/docker-snap-cannot-connect-to-the-docker-daemon-is-the-docker-daemon-running-o]%E9%87%8D%E6%96%B0%E5%AE%89%E8%A3%9D">https://askubuntu.com/questions/907110/docker-snap-cannot-connect-to-the-docker-daemon-is-the-docker-daemon-running-o]重新安裝</a>. 又要多花 5~10 Mins 的時間.</p><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake">sudo snap <span class="hljs-keyword">remove</span> docker --purge<br>sudo snap <span class="hljs-keyword">install</span> docker<br></code></pre></td></tr></table></figure><p>後來找到這篇文章(StackOverflow)[<a href="https://stackoverflow.com/questions/63613629/docker-via-snap-cannot-connect-to-the-docker-daemon-on-a-year-old-installation]">https://stackoverflow.com/questions/63613629/docker-via-snap-cannot-connect-to-the-docker-daemon-on-a-year-old-installation]</a> 大致上是先透過 </p><pre><code>snap logs docker</code></pre><p>尋找錯誤訊息,然後就看到 docker.dockerd: Failed to start docker daemon: pid file found ensure docker is not running or delete /var/snap/docker/471/run/docker.pid, 後來把 pid 移除後,重新 sudo snap start docker 就可以正常運行了.</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>-Fail to start snap docker</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Install VSCode in ubuntu</title>
     <link href="/2020/12/23/installVscode/"/>
     <url>/2020/12/23/installVscode/</url>
