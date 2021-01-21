@@ -1,5 +1,5 @@
 ---
-title: JavaScript function context
+title: install laradock on ubuntu by snap
 date: 2020-12-17 16:03
 tags: -docker laravel
 ---
