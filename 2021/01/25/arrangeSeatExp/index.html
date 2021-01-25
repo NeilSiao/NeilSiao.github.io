@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>snap docker is inactive - Hexo</title>
+  <title>ArrangeSeatExp - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -162,9 +162,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="snap docker is inactive">
+            <span class="h2" id="subtitle" title="ArrangeSeatExp">
               
-                snap docker is inactive
+                ArrangeSeatExp
               
             </span>
 
@@ -174,8 +174,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-01-21 16:18" pubdate>
-        January 21, 2021 pm
+      <time datetime="2021-01-25 16:18" pubdate>
+        January 25, 2021 pm
       </time>
     </span>
   
@@ -186,7 +186,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      141 字
+      755 字
     </span>
   
 
@@ -196,7 +196,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      9
        分钟
     </span>
   
@@ -226,15 +226,22 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">snap docker is inactive</h1>
+            <h1 style="display: none">ArrangeSeatExp</h1>
             
             <div class="markdown-body">
-              <h2 id="snap-start-docker-啟動後還是-inactive-的怪問題"><a href="#snap-start-docker-啟動後還是-inactive-的怪問題" class="headerlink" title="snap start docker 啟動後還是 inactive 的怪問題."></a>snap start docker 啟動後還是 inactive 的怪問題.</h2><p>前一陣子,經常只要重新開機後,就會導致 docker 無法正常運行,常常需要照著<a target="_blank" rel="noopener" href="https://askubuntu.com/questions/907110/docker-snap-cannot-connect-to-the-docker-daemon-is-the-docker-daemon-running-o">這篇</a>重新安裝. 又要多花 5~10 Mins 的時間.</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake">sudo snap <span class="hljs-keyword">remove</span> docker --purge<br>sudo snap <span class="hljs-keyword">install</span> docker<br></code></pre></td></tr></table></figure>
-
-<p>後來找到<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/63613629/docker-via-snap-cannot-connect-to-the-docker-daemon-on-a-year-old-installation">這篇文章</a> 大致上是先透過 </p>
-<pre><code>snap logs docker</code></pre>
-<p>尋找錯誤訊息,然後就看到 docker.dockerd: Failed to start docker daemon: pid file found ensure docker is not running or delete /var/snap/docker/471/run/docker.pid, 後來把 pid 移除後,重新 sudo snap start docker 就可以正常運行了.</p>
+              <h2 id="寫一個簡單的排座位系統"><a href="#寫一個簡單的排座位系統" class="headerlink" title="寫一個簡單的排座位系統"></a>寫一個簡單的排座位系統</h2><p>這是一個挺簡單的系統,但是在實作過程中還是會卡在一些地方,算是當作筆記,讓之後自己在撰寫程式時,比較不容易採坑.</p>
+<blockquote>
+<p>使用 Laravel, jQuery, 一點點的 Vue</p>
+</blockquote>
+<h3 id="Jquery-和-Vue-js"><a href="#Jquery-和-Vue-js" class="headerlink" title="Jquery 和 Vue.js"></a>Jquery 和 Vue.js</h3><p>起初想說此系統應該沒有很複雜,可能 Jquery 操作資料+DOM,弄一弄就好了,但是實際在撰寫的過程中,發現挺多問題的,因為要照顧的對象有兩個（Dom,Data）,所以時常遇到資料操作完了,又要回頭思考我要在哪裡綁定 Event 比較好,常常來回跑,且程式檔案變多之後,已經有點看不清楚資料是如何在我的 js 檔案之中流動了…  </p>
+<p>後來將其中一個 Modal 畫面改寫成 Vue.js 搭配 vue dev tool, 此時可以先發現一個好處,我減少大量在 jquery console.log 的處境了!! 這一點很重要,不然在 jQuery 的世界只能不斷的 log 看資料在哪個步驟變成怎樣, Vue.js 偶爾還是需要 log 看看資料的轉移. 但減少很多.</p>
+<p>下一次我個人會推薦嘗試看看資料導向的前端框架, 畢竟減少不少考慮 Dom 和找資料的時間.</p>
+<h3 id="亂數排序座位與學生"><a href="#亂數排序座位與學生" class="headerlink" title="亂數排序座位與學生"></a>亂數排序座位與學生</h3><p>在亂數排序的過程中, 最重要的是亂數的機率,比起 version 1, 其實要使用 version 2 (Fisher-Yates Shuffle), 才能達到更好的隨機效果.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//version 1, </span><br><span class="hljs-comment">//it depends on browser&#x27;s sorting method. </span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sort</span>(<span class="hljs-params">array</span>)</span>&#123;<br>    array.sort(<span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">Math</span>.random() - <span class="hljs-number">0.5</span>)<br>&#125;<br><br><br><span class="hljs-comment">//version 2</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Fisher-Yates Shuffle</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param <span class="hljs-type">&#123;array&#125;</span> </span>array </span><br><span class="hljs-comment"> * if u don&#x27;t want to change original array, use array.slice(0)</span><br><span class="hljs-comment"> * to assign new data. var newArray = array.slice(0);</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">shuffle</span>(<span class="hljs-params">array</span>) </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = array.length - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; i--) &#123;<br>        <span class="hljs-keyword">let</span> j = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * (i + <span class="hljs-number">1</span>));<br>        [array[i], array[j]] = [array[j], array[i]];<br>    &#125;<br>    <span class="hljs-keyword">return</span> array;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="定義系統需求"><a href="#定義系統需求" class="headerlink" title="定義系統需求"></a>定義系統需求</h3><p>寫到隨機排序座位功能時,心中一直有一種這樣可以,那樣做更好的想法,結果程式碼改來改去的,浪費不少時間… </p>
+<p>當初在構思時,其實也沒有想太多（座位,學生,亂數隨機）, 確實也是如此, 但是當畫面的呈現與實際撰寫還是有些微的出入, 譬如學生屬於某個班級,那是不是可以直接把整班的學生抓進來亂數隨機, 教室切換班級時,是不是應該保留先前的隨機資料,一些比較細節的地方,都值得考慮是否要作到那麼複雜</p>
+<p>此外還可以繼續延伸下去,例如：加入<code>時段, 課程</code>的條件因素等等, 系統就會更加複雜, 所以明確的系統需求就佔有相當重要的成份, 如果一直做下去,其實沒完沒了…</p>
+<h3 id="成果網站參考"><a href="#成果網站參考" class="headerlink" title="成果網站參考"></a>成果網站參考</h3><p><a target="_blank" rel="noopener" href="https://arrange-seat.herokuapp.com/">https://arrange-seat.herokuapp.com/</a><br>測試帳號: <a href="mailto:&#116;&#x65;&#115;&#x74;&#x40;&#116;&#101;&#x73;&#116;&#46;&#x63;&#111;&#x6d;">&#116;&#x65;&#115;&#x74;&#x40;&#116;&#101;&#x73;&#116;&#46;&#x63;&#111;&#x6d;</a><br>測試密碼: 12345678</p>
 
             </div>
             <hr>
@@ -245,7 +252,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Fail-to-start-snap-docker/">-Fail to start snap docker</a>
+                      <a class="hover-with-bg" href="/tags/learning/">-learning</a>
                     
                   </div>
                 
@@ -258,18 +265,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/01/25/pushHerokuLaravel/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">在 heroku 部屬 Laravel</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/12/23/installVscode/">
-                        <span class="hidden-mobile">Install VSCode in ubuntu</span>
+                      <a href="/2021/01/25/pushHerokuLaravel/">
+                        <span class="hidden-mobile">在 heroku 部屬 Laravel</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

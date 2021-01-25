@@ -183,6 +183,93 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/01/25/arrangeSeatExp/">ArrangeSeatExp</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/25/arrangeSeatExp/">
+          
+          
+            
+          
+          寫一個簡單的排座位系統這是一個挺簡單的系統,但是在實作過程中還是會卡在一些地方,算是當作筆記,讓之後自己在撰寫程式時,比較不容易採坑.
+
+使用 Laravel, jQuery, 一點點的 Vue
+
+Jquery 和 Vue.js起初想說此系統應該沒有很複雜,可能 Jquery 操作資料+DOM,弄一弄就好了,但是實際在撰寫的過程中,發現挺多問題的,因為要照顧的對象有兩個（Dom,Data）,所以時
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-25 16:18" pubdate>
+              2021-01-25
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/learning/">-learning</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/25/pushHerokuLaravel/">在 heroku 部屬 Laravel</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/25/pushHerokuLaravel/">
+          
+          
+            
+          
+          部屬流程紀錄部屬 laravel app 到 heroku 上的流程, 雖然部屬過好幾次了, 可是每次都會忘記,因此留下這篇當作紀錄…
+1234567891011121314151617181920212223//heroku-cli//指定Apache2 pubilc directoryecho &quot;web: vendor/bin/heroku-php-apache2 public/&q
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-25 14:27" pubdate>
+              2021-01-25
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/heroku-deployment/">-heroku deployment</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/01/21/dockerInactive/">snap docker is inactive</a>
       </h1>
 
@@ -192,7 +279,12 @@
           
             
           
-          snap start docker 啟動後還是 inactive 的怪問題.前一陣子,經常只要重新開機後,就會導致 docker 無法正常運行,常常需要照著(這篇)[https://askubuntu.com/questions/907110/docker-snap-cannot-connect-to-the-docker-daemon-is-the-docker-daemon-running-o
+          snap start docker 啟動後還是 inactive 的怪問題.前一陣子,經常只要重新開機後,就會導致 docker 無法正常運行,常常需要照著這篇重新安裝. 又要多花 5~10 Mins 的時間.
+12sudo snap remove docker --purgesudo snap install docker
+
+後來找到這篇文章 大致上是先透過 
+snap logs docker
+
         </a>
       </p>
 
