@@ -20,3 +20,7 @@ snap logs docker
 ``` 
 尋找錯誤訊息,然後就看到 docker.dockerd: Failed to start docker daemon: pid file found ensure docker is not running or delete /var/snap/docker/471/run/docker.pid, 後來把 pid 移除後,重新 sudo snap start docker 就可以正常運行了.
 
+## 另外一種錯誤
+`2020-07-16T23:49:14Z docker.dockerd[932]: failed to start containerd: timeout waiting for containerd to start`。這個問題看起來是虛擬機關機操作不正確才導致常常出現這種錯誤，後來找到(這篇)[https://stackoverflow.com/questions/62945254/docker-fails-with-failed-to-start-containerd-timeout-waiting-for-containerd-to]只要把`/var/snap/docker/471/run/docker/containerd/containerd.pid` 移除後重新 `sudo snap stop docker && `sudo snap start docker` 即可排除問題。
+
+
