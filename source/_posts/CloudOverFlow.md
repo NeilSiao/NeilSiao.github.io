@@ -1,6 +1,6 @@
 ---
 title: Avoid AWS GCP Azure Cost Disasters
-date: 2021-01-21 16:18
+date: 2021-03-15 21:26
 tags: -cloud 
 ---
 
