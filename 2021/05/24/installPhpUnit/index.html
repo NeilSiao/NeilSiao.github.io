@@ -18,7 +18,7 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-  <title>利用 xampp 架設 Laravel 和 SSL、Let&#39;s encrypted - Hexo</title>
+  <title>Install phpunit - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,9 +163,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="利用 xampp 架設 Laravel 和 SSL、Let's encrypted">
+            <span class="h2" id="subtitle" title="Install phpunit">
               
-                利用 xampp 架設 Laravel 和 SSL、Let's encrypted
+                Install phpunit
               
             </span>
 
@@ -175,8 +175,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-15 15:46" pubdate>
-        March 15, 2021 pm
+      <time datetime="2021-05-24 20:04" pubdate>
+        May 24, 2021 pm
       </time>
     </span>
   
@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      667 字
+      290 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      5
        分钟
     </span>
   
@@ -227,47 +227,18 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">利用 xampp 架設 Laravel 和 SSL、Let&#39;s encrypted</h1>
+            <h1 style="display: none">Install phpunit</h1>
             
             <div class="markdown-body">
-              <p>[TOC]</p>
-<h1 id="xampp-安裝教學"><a href="#xampp-安裝教學" class="headerlink" title="xampp 安裝教學"></a>xampp 安裝教學</h1><p>xampp 安裝教學的部分參考 <a target="_blank" rel="noopener" href="https://walker-a.com/archives/6255">挨踢路人甲
-</a></p>
-<h1 id="Laravel-安裝"><a href="#Laravel-安裝" class="headerlink" title="Laravel 安裝"></a>Laravel 安裝</h1><p>選擇專案資料夾</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs console">//安裝<br>composer create-project laravel/laravel chatbot<br>//產生金鑰<br>php artisan key:generate<br></code></pre></td></tr></table></figure>
+              <p>[toc]</p>
+<h2 id="Install-PHPUnit"><a href="#Install-PHPUnit" class="headerlink" title="Install PHPUnit"></a>Install PHPUnit</h2><p>前置安裝:<br>    - Composer (PHP套件管理工具)<br>    - PHP</p>
+<p>[(PHPUnit) [<a target="_blank" rel="noopener" href="https://phpunit.de/]]%EF%BC%8CPHP%E7%9A%84%E6%B8%AC%E8%A9%A6%E5%A5%97%E4%BB%B6%EF%BC%8C%E7%94%A8%E4%BE%86%E6%92%B0%E5%AF%AB%E7%A8%8B%E5%BC%8F%E6%B8%AC%E8%A9%A6%E7%94%A8%E3%80%82%E6%A0%B9%E6%93%9A%E5%AE%98%E7%B6%B2%E7%9A%84%E4%BB%8B%E7%B4%B9%EF%BC%8C%E5%AE%89%E8%A3%9D%E6%AD%A5%E9%A9%9F%E5%A6%82%E4%B8%8B">https://phpunit.de/]]，PHP的測試套件，用來撰寫程式測試用。根據官網的介紹，安裝步驟如下</a>:</p>
+<pre><code>-  composer require --dev phpunit ^9
+-  ./vendor/bin/phpunit --version  ## Windows 需要改寫 &quot;./vendor/bin/phpunit&quot; --version
 
-<h1 id="DNS-申請"><a href="#DNS-申請" class="headerlink" title="DNS 申請"></a>DNS 申請</h1><p>使用免費的 DNS 服務 <a target="_blank" rel="noopener" href="https://www.freenom.com/zu/index.html?lang=zu">Freenom</a>， 參考<a target="_blank" rel="noopener" href="https://www.kocpc.com.tw/archives/180195">電腦王阿達 - 架站的前哨站，免費的 freenom 網域申請</a></p>
-<p>主要就是輸入自己喜歡的 domainName 註冊完畢，然後設定 A (IPv4) 紀錄，指向哪一個 IP，再讓子彈飛一會，DNS 擴散完畢，就可以對應到你的主機了。</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://appuals.com/how-to-fix-server-dns-address-could-not-be-found-error-on-google-chrome/">網站可以檢查 DNS 散播情況</a></p>
-</blockquote>
-<blockquote>
-<p>AAAA 是指 IPv6</p>
-</blockquote>
-<blockquote>
-<p>CNAME 表示 domainName 的其他別名, 例如 <a target="_blank" rel="noopener" href="http://www.neilsiao.tk/">www.neilsiao.tk</a> 指向 neilsiao.tk</p>
-</blockquote>
-<h1 id="Let’s-encrypted-申請"><a href="#Let’s-encrypted-申請" class="headerlink" title="Let’s encrypted 申請"></a>Let’s encrypted 申請</h1><p>由於環境不是 Unix like 的環境，所以使用 sslforfree.com 取得憑證，下載後有三個檔案 ca_bundle.crt、certificate.crt、private.key，將檔案放置到 apache/conf/ssl 相關位置，修改 httpd-vhosts.conf 設定如下，接著為了驗證網站所有者是妳本人，到 Laravel 專案的 public 資料夾建立 /well-known/pki-validation/{sslforfree 的 txt 檔案}，搭配 sslforfree 驗證按鈕，就會去驗證你確實是網站的主人，完成 SSL 設定。</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs console">SSLEngine on<br>SSLCertificateFile &quot;D:/xampp/apache/conf/ssl.crt/certificate.crt&quot;<br>SSLCertificateKeyFile &quot;D:/xampp/apache/conf/ssl.key/private.key&quot;<br>SSLCertificateChainFile &quot;D:/xampp/apache/conf/ssl.crt/ca_bundle.crt&quot;<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>sslforfree.com 本身也是使用 let’s encrypted 的服務，</p>
-</blockquote>
-<p>參考教學 <a target="_blank" rel="noopener" href="https://medium.com/@45EMC521/xampp-%E4%BD%BF%E7%94%A8-lets-encrypt-ssl-%E9%96%8B%E5%95%9F%E5%8A%A0%E5%AF%86%E9%80%A3%E7%B7%9A-%E5%AE%8C%E6%95%B4%E6%95%99%E5%AD%B8-c05b5f97195a">XAMPP 使用 Let’s Encrypt SSL 開啟加密連線—完整教學</a></p>
-<h1 id="Apache-設定檔"><a href="#Apache-設定檔" class="headerlink" title="Apache 設定檔"></a>Apache 設定檔</h1><p>參考教學 <a target="_blank" rel="noopener" href="https://medium.com/%E6%B5%A6%E5%B3%B6%E5%A4%AA%E9%83%8E%E7%9A%84%E6%B0%B4%E6%97%8F%E7%BC%B8/laravel-5-4-on-apache-%E5%9C%A8-apache-%E6%9E%B6-laravel-%E7%B6%B2%E7%AB%99-9b7d1ad938af">Laravel 5.4 On Apache：在 Apache 架 Laravel 網站</a></p>
-<p>透過 xampp 的控制面板，可以找到 Apache config 按鈕，可以找到相關路徑，主要的設定檔有 httpd.conf、httpd-vhosts</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs console">// httpd.conf 確保有 Include vhost<br><span class="hljs-meta">#</span><span class="bash"> Virtual hosts</span><br>Include conf/extra/httpd-vhosts.conf<br><br>// httpd-vhosts.conf<br>&lt;VirtualHost *:80&gt;<br>    #ServerAdmin webmaster@dummy-host.example.com<br>    ServerName neilsiao.tk<br>    ServerAlias www.neilsiao.tk<br>    # 80 port 的流量導到 443 https<br>    Redirect 301 / https://neilsiao.tk<br>&lt;/VirtualHost&gt;<br><br>&lt;VirtualHost *:443&gt;<br>    #ServerAdmin webmaster@dummy-host.example.com<br>    DocumentRoot &quot;D:/Interview/chatbot/public&quot;<br>    ServerName neilsiao.tk<br>    ServerAlias www.neilsiao.tk<br>    ErrorLog &quot;logs/dummy-host.example.com-error.log&quot;<br>    CustomLog &quot;logs/dummy-host.example.com-access.log&quot; common<br><br>    #Laravel 專案位置<br>	&lt;Directory D:/Interview/chatbot/public&gt;<br>		AllowOverride all<br>		Require all granted # 不限制 IP 連入網站<br>	&lt;/Directory&gt;<br><br>    # SSL 設定<br>	SSLEngine on<br>	SSLCertificateFile &quot;D:/xampp/apache/conf/ssl.crt/certificate.crt&quot;<br>	SSLCertificateKeyFile &quot;D:/xampp/apache/conf/ssl.key/private.key&quot;<br>	SSLCertificateChainFile &quot;D:/xampp/apache/conf/ssl.crt/ca_bundle.crt&quot;<br>&lt;/VirtualHost&gt;<br><br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://dotblogs.com.tw/maplenote/2012/07/20/apache24_httpd_conf">Apache 從 2.2 換至 2.4 httpd.conf 的調整筆記 (windows 環境)</a></p>
-</blockquote>
-<h1 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h1><ol>
-<li>xampp 安裝 Apache, MariaDB, PHP</li>
-<li>Freenom 購買 Domain, 設定 A、CNAME 參照 IP 與 www 的名稱</li>
-<li>安裝 Laravel 專案，php artisan key:generate</li>
-<li>申請 SSL 憑證，至 xampp 的 httpd-vhosts 設定憑證的三個檔案，在 Laravel public 新增 /well-known/pki-validation/{sslforfree.txt}檔案</li>
-<li>訪問 domain name ， OK</li>
-</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-comment">// 調整 composer.json 後，執行 composer dump 產生 autoload.php</span><br>&#123;<br>    <span class="hljs-attr">&quot;autoload&quot;</span>: &#123;<br>        <span class="hljs-attr">&quot;psr-4&quot;</span>: &#123;<br>            <span class="hljs-attr">&quot;App\\&quot;</span>:<span class="hljs-string">&quot;src&quot;</span><br>        &#125;<br>    &#125;,<br>    <span class="hljs-attr">&quot;require-dev&quot;</span>: &#123;<br>        <span class="hljs-attr">&quot;phpunit/phpunit&quot;</span>: <span class="hljs-string">&quot;9&quot;</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></code></pre>
+<h2 id="PHPUnit官網上的範例程式碼"><a href="#PHPUnit官網上的範例程式碼" class="headerlink" title="PHPUnit官網上的範例程式碼"></a>PHPUnit官網上的範例程式碼</h2><pre><code><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// test/EmailTest.php</span><br><span class="hljs-meta">&lt;?php</span><br><br><span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Email</span>;<br><span class="hljs-keyword">use</span> <span class="hljs-title">PHPUnit</span>\<span class="hljs-title">Framework</span>\<span class="hljs-title">TestCase</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EmailTest</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">TestCase</span></span><br><span class="hljs-class"></span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">testCanBeCreatedFromValidEmailAddress</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">$this</span>-&gt;assertInstanceOf(<br>            Email::class,<br>            Email::fromString(<span class="hljs-string">&#x27;user@example.com&#x27;</span>)<br>        );<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">testCannotBeCreatedFromInvalidEmailAddress</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">$this</span>-&gt;expectException(<span class="hljs-built_in">InvalidArgumentException</span>::class);<br><br>        Email::fromString(<span class="hljs-string">&#x27;invalid&#x27;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">testCanBeUsedAsString</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">$this</span>-&gt;assertEquals(<br>            <span class="hljs-string">&#x27;user@example.com&#x27;</span>,<br>            Email::fromString(<span class="hljs-string">&#x27;user@example.com&#x27;</span>)<br>        );<br>    &#125;<br><br>&#125;<br><br><span class="hljs-comment">//src/Email.php</span><br><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">declare</span> (strict_types = <span class="hljs-number">1</span>);<br><span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Email</span></span><br><span class="hljs-class"></span>&#123;<br><br>    <span class="hljs-keyword">private</span> $email;<br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> $email</span>)</span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">$this</span>-&gt;ensureIsValidEmail($email);<br><br>        <span class="hljs-keyword">$this</span>-&gt;email = $email;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fromString</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> $email</span>): <span class="hljs-title">self</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">self</span>($email);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__toString</span>(<span class="hljs-params"></span>): <span class="hljs-title">string</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;email;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ensureIsValidEmail</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> $email</span>): <span class="hljs-title">void</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">if</span> (!filter_var($email, FILTER_VALIDATE_EMAIL)) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> \<span class="hljs-built_in">InvalidArgumentException</span>(<br>                sprintf(<br>                    <span class="hljs-string">&#x27;&quot;%s&quot; is not a valid email address&#x27;</span>,<br>                    $email<br>                )<br>            );<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></code></pre>
+<h2 id="Running-PHPUnit"><a href="#Running-PHPUnit" class="headerlink" title="Running PHPUnit"></a>Running PHPUnit</h2><pre><code>![PHPUnit 執行畫面](/img/phpunitCmd.jpg)</code></pre>
 
             </div>
             <hr>
@@ -278,7 +249,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/learning-xampp-laravel-ssl/">-learning xampp laravel ssl</a>
+                      <a class="hover-with-bg" href="/tags/php-phpunit/">-php phpunit</a>
                     
                   </div>
                 
@@ -295,18 +266,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/15/CloudOverFlow/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Avoid AWS GCP Azure Cost Disasters</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/26/javaScriptArrayManipulate/">
-                        <span class="hidden-mobile">JavaScript 陣列操作</span>
+                      <a href="/2021/03/15/CloudOverFlow/">
+                        <span class="hidden-mobile">Avoid AWS GCP Azure Cost Disasters</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
